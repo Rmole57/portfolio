@@ -22,12 +22,7 @@ export default function HeaderNav() {
       <Box
         sx={{ display: 'flex', justifyContent: 'space-between', px: '32px' }}
       >
-        <Typography
-          variant="h6"
-          component="h1"
-          display="flex"
-          alignItems="center"
-        >
+        <Typography variant="button" display="flex" alignItems="center">
           Rick Molé
         </Typography>
         <Tabs value={value} onChange={handleChange}>
