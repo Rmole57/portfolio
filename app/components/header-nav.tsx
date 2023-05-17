@@ -20,7 +20,7 @@ export default function HeaderNav() {
       }}
     >
       <Box
-        sx={{ display: 'flex', justifyContent: 'space-between', px: '32px' }}
+        sx={{ display: 'flex', justifyContent: 'space-between', px: '100px' }}
       >
         <Typography variant="button" display="flex" alignItems="center">
           Rick Molé
