@@ -6,10 +6,10 @@ import profilePic from '../../public/rick-mole.jpg';
 
 export default function About() {
   return (
-    <Box display="flex" margin="56px 100px" gap={6}>
+    <Box id="about" display="flex" margin="56px 100px" gap={6}>
       <Image src={profilePic} alt="Rick Molé" width={500} height={300} />
       <Box>
-        <Typography variant="h3">More about me</Typography>
+        <Typography variant="h2">About me</Typography>
         <Typography variant="body1">
           I&apos;m a software engineer based in New York, NY. I have multiple
           years of experience using a variety of technologies across the

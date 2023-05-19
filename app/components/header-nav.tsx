@@ -3,7 +3,23 @@
 import { Box, Tab, Tabs, Typography } from '@mui/material';
 import React from 'react';
 
-const NAV_ITEMS = ['About', 'Projects', 'Contact'];
+type NavItem = {
+  label: string;
+  href: string;
+  download?: string;
+};
+
+const NAV_ITEMS: NavItem[] = [
+  { label: 'About', href: '#about' },
+  { label: 'Work', href: '#work' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+  {
+    label: 'Resume',
+    href: 'rick-mole-resume.pdf',
+    download: 'rick-mole-resume.pdf',
+  },
+];
 
 export default function HeaderNav() {
   const [value, setValue] = React.useState(0);
@@ -22,12 +38,18 @@ export default function HeaderNav() {
       <Box
         sx={{ display: 'flex', justifyContent: 'space-between', px: '100px' }}
       >
-        <Typography variant="button" display="flex" alignItems="center">
+        <Typography
+          href="#"
+          component="a"
+          variant="button"
+          display="flex"
+          alignItems="center"
+        >
           Rick Molé
         </Typography>
         <Tabs value={value} onChange={handleChange}>
-          {NAV_ITEMS.map((item, idx) => (
-            <Tab label={item} key={`${item}-${idx}`} />
+          {NAV_ITEMS.map((navItem, idx) => (
+            <Tab component="a" key={`${navItem.label}-${idx}`} {...navItem} />
           ))}
         </Tabs>
       </Box>

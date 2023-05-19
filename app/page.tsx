@@ -1,6 +1,13 @@
 'use client';
 
-import { HeaderNav, Hero, About, Projects, Contact } from './components';
+import {
+  HeaderNav,
+  Hero,
+  About,
+  RecentWork,
+  OtherProjects,
+  Contact,
+} from './components';
 import { Box } from '@mui/material';
 
 export default function Home() {
@@ -9,7 +16,8 @@ export default function Home() {
       <HeaderNav />
       <Hero />
       <About />
-      <Projects />
+      <RecentWork />
+      <OtherProjects />
       <Contact />
     </Box>
   );
