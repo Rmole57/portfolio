@@ -8,17 +8,26 @@ import {
   OtherProjects,
   Contact,
 } from './components';
-import { Box } from '@mui/material';
+import { ThemeProvider, createTheme, Divider } from '@mui/material';
+import { siteTheme } from './site-theme';
+
+const CustomDivider = () => <Divider light sx={{ mx: '15%' }} />;
 
 export default function Home() {
+  const theme = createTheme(siteTheme);
+
   return (
-    <Box>
+    <ThemeProvider theme={theme}>
       <HeaderNav />
       <Hero />
+      <CustomDivider />
       <About />
+      <CustomDivider />
       <RecentWork />
+      <CustomDivider />
       <OtherProjects />
+      <CustomDivider />
       <Contact />
-    </Box>
+    </ThemeProvider>
   );
 }

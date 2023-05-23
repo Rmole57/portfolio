@@ -1,3 +1,18 @@
+html {
+  scroll-behavior: smooth !important;
+}
+
 body {
-  margin: 0;
+  margin: 0px;
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+.popover {
+  display: block;
+  color: #120051;
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
 }

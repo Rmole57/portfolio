@@ -48,6 +48,7 @@ export default function OtherProjects() {
   return (
     <Box
       id="projects"
+      component="section"
       display="flex"
       flexDirection="column"
       margin="56px 100px"
@@ -87,7 +88,6 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
       <Image
         src={imageSrc}
         alt={imageAlt}
-        // TODO: Fix ratios of images!
         width={340}
         height={220}
         style={{ borderRadius: '4px', boxShadow: '0 0 4px gray' }}
@@ -111,9 +111,23 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
         onClose={handlePopoverClose}
         disableScrollLock
       >
-        <Typography>{title}</Typography>
-        <Typography>{description}</Typography>
-        <Typography>{tech}</Typography>
+        <Box
+          display="flex"
+          flexDirection="column"
+          sx={{ padding: '16px', justifyContent: 'space-between' }}
+          width={280}
+          height={160}
+        >
+          <Typography className="popover" variant="popoverTitle">
+            {title}
+          </Typography>
+          <Typography className="popover" variant="popoverContent">
+            {description}
+          </Typography>
+          <Typography className="popover" variant="popoverSubContent">
+            Built with: {tech}
+          </Typography>
+        </Box>
       </Popover>
     </>
   );

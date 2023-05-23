@@ -8,22 +8,20 @@ export default function Contact() {
     <Box
       id="contact"
       display="flex"
-      flexDirection="column"
-      margin="56px 100px"
-      gap={2}
+      component="section"
+      justifyContent="center"
+      margin="24px 100px"
+      gap={14}
     >
-      <Typography variant="h5">Get in touch</Typography>
-      <Box display="flex" gap={6}>
-        <Link href="mailto:hello@rickmole.dev">
-          <EmailIcon />
-        </Link>
-        <Link href="https://www.linkedin.com/in/rick-mole/" target="_blank">
-          <LinkedInIcon />
-        </Link>
-        <Link href="https://github.com/Rmole57" target="_blank">
-          <GitHubIcon />
-        </Link>
-      </Box>
+      <Link href="mailto:hello@rickmole.dev">
+        <EmailIcon />
+      </Link>
+      <Link href="https://www.linkedin.com/in/rick-mole/" target="_blank">
+        <LinkedInIcon />
+      </Link>
+      <Link href="https://github.com/Rmole57" target="_blank">
+        <GitHubIcon />
+      </Link>
     </Box>
   );
 }

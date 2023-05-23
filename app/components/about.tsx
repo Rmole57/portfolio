@@ -6,11 +6,26 @@ import profilePic from '../../public/rick-mole.jpg';
 
 export default function About() {
   return (
-    <Box id="about" display="flex" margin="56px 100px" gap={6}>
-      <Image src={profilePic} alt="Rick Molé" width={500} height={300} />
-      <Box>
+    <Box
+      id="about"
+      component="section"
+      display="flex"
+      margin="56px 100px"
+      gap={6}
+    >
+      <Image
+        src={profilePic}
+        alt="Rick Molé"
+        width={500}
+        height={300}
+        style={{
+          borderRadius: '4px',
+          boxShadow: '0 0 4px gray',
+        }}
+      />
+      <Box display="flex" flexDirection="column" gap={2}>
         <Typography variant="h2">About me</Typography>
-        <Typography variant="body1">
+        <Typography variant="body2">
           I&apos;m a software engineer based in New York, NY. I have multiple
           years of experience using a variety of technologies across the
           development stack. As a firm believer in the notion that there is no

@@ -30,10 +30,15 @@ export default function HeaderNav() {
 
   return (
     <Box
+      component="nav"
       sx={{
         borderBottom: 1,
         borderColor: 'divider',
+        backgroundColor: '#fff',
       }}
+      height="48px"
+      position="sticky"
+      top={0}
     >
       <Box
         sx={{ display: 'flex', justifyContent: 'space-between', px: '100px' }}
@@ -44,6 +49,8 @@ export default function HeaderNav() {
           variant="button"
           display="flex"
           alignItems="center"
+          color="#666666"
+          style={{ textDecoration: 'none' }}
         >
           Rick Molé
         </Typography>
