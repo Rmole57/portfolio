@@ -1,7 +1,9 @@
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link, LinkBaseProps } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
+import { motion } from 'framer-motion';
+import { FC } from 'react';
 
 export default function Contact() {
   return (
@@ -13,15 +15,30 @@ export default function Contact() {
       margin="24px 100px"
       gap={14}
     >
-      <Link href="mailto:hello@rickmole.dev">
+      <ContactLink href="mailto:hello@rickmole.dev">
         <EmailIcon />
-      </Link>
-      <Link href="https://www.linkedin.com/in/rick-mole/" target="_blank">
+      </ContactLink>
+      <ContactLink
+        href="https://www.linkedin.com/in/rick-mole/"
+        target="_blank"
+      >
         <LinkedInIcon />
-      </Link>
-      <Link href="https://github.com/Rmole57" target="_blank">
+      </ContactLink>
+      <ContactLink href="https://github.com/Rmole57" target="_blank">
         <GitHubIcon />
-      </Link>
+      </ContactLink>
     </Box>
   );
 }
+
+interface ContactLinkProps extends LinkBaseProps {
+  children: React.ReactNode;
+}
+
+const ContactLink: FC<ContactLinkProps> = ({ href, children }) => {
+  return (
+    <motion.div whileHover={{ scale: 1.5 }}>
+      <Link href={href}>{children}</Link>
+    </motion.div>
+  );
+};
