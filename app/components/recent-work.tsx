@@ -84,7 +84,7 @@ export default function RecentWork() {
                     variant="outlined"
                     href={ctaLink}
                     target="_blank"
-                    sx={{ borderRadius: '20px', width: 'fit-content' }}
+                    sx={{ borderRadius: '4px', width: 'fit-content' }}
                   >
                     <Typography variant="ctaButton">{ctaText}</Typography>
                   </Button>
