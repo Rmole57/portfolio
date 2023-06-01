@@ -39,6 +39,7 @@ export default function HeaderNav() {
       height="48px"
       position="sticky"
       top={0}
+      zIndex={1}
     >
       <Box
         sx={{ display: 'flex', justifyContent: 'space-between', px: '100px' }}

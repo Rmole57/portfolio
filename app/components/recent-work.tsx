@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import tapestryImage from '../../public/tapestry-ui.png';
 import hightouchSiteImage from '../../public/hightouch-ui.png';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { motion } from 'framer-motion';
 
 export type LargeProject = {
   title: string;
@@ -37,45 +37,64 @@ const PROJECTS: LargeProject[] = [
 
 export default function RecentWork() {
   return (
-    <Box
-      id="work"
-      display="flex"
-      component="section"
-      flexDirection="column"
-      margin="56px 100px"
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1.25 }}
+      viewport={{ once: true }}
     >
-      <Typography variant="h2">Recent work</Typography>
-      {PROJECTS.map((project, idx) => {
-        const { title, description, imageSrc, imageAlt, ctaText, ctaLink } =
-          project;
+      <Box
+        id="work"
+        display="flex"
+        component="section"
+        flexDirection="column"
+        margin="56px 100px"
+      >
+        <Typography variant="h2">Recent work</Typography>
+        {PROJECTS.map((project, idx) => {
+          const { title, description, imageSrc, imageAlt, ctaText, ctaLink } =
+            project;
 
-        return (
-          <Box display="flex" key={`project-${idx}-${title}`} gap={10} mt={-6}>
+          return (
             <Box
               display="flex"
-              flexDirection="column"
-              gap={2}
-              justifyContent="center"
+              key={`project-${idx}-${title}`}
+              gap={10}
+              mt={-6}
             >
-              <Typography variant="h3">{title}</Typography>
-              <Typography variant="body2" whiteSpace="pre-wrap">
-                {description}
-              </Typography>
-              <Link
+              <Box
                 display="flex"
-                href={ctaLink}
-                underline="none"
-                target="_blank"
-                sx={{ alignItems: 'center' }}
+                flexDirection="column"
+                gap={2}
+                justifyContent="center"
               >
-                <Typography variant="ctaLink">{ctaText}</Typography>
-                <ArrowForwardIcon fontSize="small" sx={{ ml: '2px' }} />
-              </Link>
+                <Typography variant="h3">{title}</Typography>
+                <Typography variant="body2" whiteSpace="pre-wrap">
+                  {description}
+                </Typography>
+                <motion.div
+                  whileHover={{
+                    scale: 1.1,
+                    transition: { duration: 0.2 },
+                    originX: 0,
+                  }}
+                  style={{ width: 'fit-content' }}
+                >
+                  <Button
+                    variant="outlined"
+                    href={ctaLink}
+                    target="_blank"
+                    sx={{ borderRadius: '4px', width: 'fit-content' }}
+                  >
+                    <Typography variant="ctaButton">{ctaText}</Typography>
+                  </Button>
+                </motion.div>
+              </Box>
+              <Image src={imageSrc} alt={imageAlt} width={700} height={360} />
             </Box>
-            <Image src={imageSrc} alt={imageAlt} width={700} height={360} />
-          </Box>
-        );
-      })}
-    </Box>
+          );
+        })}
+      </Box>
+    </motion.div>
   );
 }
