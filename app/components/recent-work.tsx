@@ -37,52 +37,64 @@ const PROJECTS: LargeProject[] = [
 
 export default function RecentWork() {
   return (
-    <Box
-      id="work"
-      display="flex"
-      component="section"
-      flexDirection="column"
-      margin="56px 100px"
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 2 }}
+      viewport={{ once: true }}
     >
-      <Typography variant="h2">Recent work</Typography>
-      {PROJECTS.map((project, idx) => {
-        const { title, description, imageSrc, imageAlt, ctaText, ctaLink } =
-          project;
+      <Box
+        id="work"
+        display="flex"
+        component="section"
+        flexDirection="column"
+        margin="56px 100px"
+      >
+        <Typography variant="h2">Recent work</Typography>
+        {PROJECTS.map((project, idx) => {
+          const { title, description, imageSrc, imageAlt, ctaText, ctaLink } =
+            project;
 
-        return (
-          <Box display="flex" key={`project-${idx}-${title}`} gap={10} mt={-6}>
+          return (
             <Box
               display="flex"
-              flexDirection="column"
-              gap={2}
-              justifyContent="center"
+              key={`project-${idx}-${title}`}
+              gap={10}
+              mt={-6}
             >
-              <Typography variant="h3">{title}</Typography>
-              <Typography variant="body2" whiteSpace="pre-wrap">
-                {description}
-              </Typography>
-              <motion.div
-                whileHover={{
-                  scale: 1.1,
-                  transition: { duration: 0.2 },
-                  originX: 0,
-                }}
-                style={{ width: 'fit-content' }}
+              <Box
+                display="flex"
+                flexDirection="column"
+                gap={2}
+                justifyContent="center"
               >
-                <Button
-                  variant="outlined"
-                  href={ctaLink}
-                  target="_blank"
-                  sx={{ borderRadius: '20px', width: 'fit-content' }}
+                <Typography variant="h3">{title}</Typography>
+                <Typography variant="body2" whiteSpace="pre-wrap">
+                  {description}
+                </Typography>
+                <motion.div
+                  whileHover={{
+                    scale: 1.1,
+                    transition: { duration: 0.2 },
+                    originX: 0,
+                  }}
+                  style={{ width: 'fit-content' }}
                 >
-                  <Typography variant="ctaButton">{ctaText}</Typography>
-                </Button>
-              </motion.div>
+                  <Button
+                    variant="outlined"
+                    href={ctaLink}
+                    target="_blank"
+                    sx={{ borderRadius: '20px', width: 'fit-content' }}
+                  >
+                    <Typography variant="ctaButton">{ctaText}</Typography>
+                  </Button>
+                </motion.div>
+              </Box>
+              <Image src={imageSrc} alt={imageAlt} width={700} height={360} />
             </Box>
-            <Image src={imageSrc} alt={imageAlt} width={700} height={360} />
-          </Box>
-        );
-      })}
-    </Box>
+          );
+        })}
+      </Box>
+    </motion.div>
   );
 }

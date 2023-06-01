@@ -81,17 +81,24 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
     setAnchorEl(null);
   };
 
+  React.useEffect(() => {
+    document.addEventListener('scroll', handlePopoverClose);
+  });
+
   const open = Boolean(anchorEl);
+
+  console.log(anchorEl);
 
   return (
     <>
       <Image
+        className="project"
         src={imageSrc}
         alt={imageAlt}
         width={340}
         height={220}
         style={{ borderRadius: '4px', boxShadow: '0 0 4px gray' }}
-        onMouseEnter={handlePopoverOpen}
+        onMouseOver={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
       />
       <Popover
@@ -108,7 +115,6 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
           vertical: 'center',
           horizontal: 'center',
         }}
-        onClose={handlePopoverClose}
         disableScrollLock
       >
         <Box
