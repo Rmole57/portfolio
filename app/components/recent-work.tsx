@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import tapestryImage from '../../public/tapestry-ui.png';
 import hightouchSiteImage from '../../public/hightouch-ui.png';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { motion } from 'framer-motion';
 
 export type LargeProject = {
   title: string;
@@ -61,16 +61,23 @@ export default function RecentWork() {
               <Typography variant="body2" whiteSpace="pre-wrap">
                 {description}
               </Typography>
-              <Link
-                display="flex"
-                href={ctaLink}
-                underline="none"
-                target="_blank"
-                sx={{ alignItems: 'center' }}
+              <motion.div
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.2 },
+                  originX: 0,
+                }}
+                style={{ width: 'fit-content' }}
               >
-                <Typography variant="ctaLink">{ctaText}</Typography>
-                <ArrowForwardIcon fontSize="small" sx={{ ml: '2px' }} />
-              </Link>
+                <Button
+                  variant="outlined"
+                  href={ctaLink}
+                  target="_blank"
+                  sx={{ borderRadius: '20px', width: 'fit-content' }}
+                >
+                  <Typography variant="ctaButton">{ctaText}</Typography>
+                </Button>
+              </motion.div>
             </Box>
             <Image src={imageSrc} alt={imageAlt} width={700} height={360} />
           </Box>

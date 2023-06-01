@@ -1,13 +1,13 @@
 declare module '@mui/material/styles' {
   interface TypographyVariants {
-    ctaLink: React.CSSProperties;
+    ctaButton: React.CSSProperties;
     popoverTitle: React.CSSProperties;
     popoverContent: React.CSSProperties;
     popoverSubContent: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
-    ctaLink?: React.CSSProperties;
+    ctaButton?: React.CSSProperties;
     popoverTitle?: React.CSSProperties;
     popoverContent?: React.CSSProperties;
     popoverSubContent?: React.CSSProperties;
@@ -16,7 +16,7 @@ declare module '@mui/material/styles' {
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
-    ctaLink: true;
+    ctaButton: true;
     popoverTitle: true;
     popoverContent: true;
     popoverSubContent: true;
@@ -55,10 +55,11 @@ export const siteTheme = {
       fontWeight: 300,
       color: primaryTextColor,
     },
-    ctaLink: {
+    ctaButton: {
       fontSize: '16px',
       fontFamily: defaultFontFamily,
       fontWeight: 300,
+      textTransform: 'none',
     },
     popoverTitle: {
       fontSize: '20px',
@@ -75,6 +76,20 @@ export const siteTheme = {
   palette: {
     primary: {
       main: secondaryTextColor,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        outlined: {
+          color: secondaryTextColor,
+          borderColor: secondaryTextColor,
+          '&:hover': {
+            color: '#fff',
+            backgroundColor: secondaryTextColor,
+          },
+        },
+      },
     },
   },
 };
