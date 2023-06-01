@@ -7,11 +7,10 @@ import {
   RecentWork,
   OtherProjects,
   Contact,
+  CustomDivider,
 } from './components';
-import { ThemeProvider, createTheme, Divider } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material';
 import { siteTheme } from './site-theme';
-
-const CustomDivider = () => <Divider light sx={{ mx: '15%' }} />;
 
 export default function Home() {
   // @ts-ignore
