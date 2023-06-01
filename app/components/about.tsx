@@ -7,28 +7,28 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <Box
-      id="about"
-      component="section"
-      display="flex"
-      margin="56px 100px"
-      gap={6}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 2 }}
     >
-      <Image
-        src={profilePic}
-        alt="Rick Molé"
-        width={500}
-        height={300}
-        style={{
-          borderRadius: '4px',
-          boxShadow: '0 0 4px gray',
-        }}
-      />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+      <Box
+        id="about"
+        component="section"
+        display="flex"
+        margin="56px 100px"
+        gap={6}
       >
+        <Image
+          src={profilePic}
+          alt="Rick Molé"
+          width={500}
+          height={300}
+          style={{
+            borderRadius: '4px',
+            boxShadow: '0 0 4px gray',
+          }}
+        />
         <Box display="flex" flexDirection="column" gap={2}>
           <Typography variant="h2">About me</Typography>
           <Typography variant="body2">
@@ -40,7 +40,7 @@ export default function About() {
             at hand.
           </Typography>
         </Box>
-      </motion.div>
-    </Box>
+      </Box>
+    </motion.div>
   );
 }

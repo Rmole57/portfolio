@@ -6,6 +6,7 @@ import reactionImage from '../../public/reaction.png';
 import messBucketImage from '../../public/messbucket.png';
 import dijkstraImage from '../../public/dijkstra.png';
 import todoListImage from '../../public/todo-list.png';
+import { motion } from 'framer-motion';
 
 type SmallProject = Omit<LargeProject, 'ctaText' | 'ctaLink'> & {
   tech: string;
@@ -83,14 +84,19 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
 
   React.useEffect(() => {
     document.addEventListener('scroll', handlePopoverClose);
-  });
+  }, []);
 
   const open = Boolean(anchorEl);
 
   console.log(anchorEl);
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1.2 }}
+      viewport={{ once: true }}
+    >
       <Image
         className="project"
         src={imageSrc}
@@ -135,6 +141,6 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
           </Typography>
         </Box>
       </Popover>
-    </>
+    </motion.div>
   );
 }
