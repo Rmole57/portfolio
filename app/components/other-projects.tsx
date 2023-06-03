@@ -3,7 +3,7 @@ import { Box, Grid, Popover, Typography } from '@mui/material';
 import Image from 'next/image';
 import { LargeProject } from './recent-work';
 import reactionImage from '../../public/reaction.png';
-import messBucketImage from '../../public/messbucket.png';
+import messageBucketImage from '../../public/messagebucket.png';
 import dijkstraImage from '../../public/dijkstra.png';
 import todoListImage from '../../public/todo-list.png';
 import { motion } from 'framer-motion';
@@ -21,11 +21,11 @@ const PROJECTS: SmallProject[] = [
     tech: 'React Redux, Node.js/Express, MongoDB',
   },
   {
-    title: 'MessBucket',
+    title: 'MessageBucket',
     description:
       'Database-backed application for receiving and debugging webhooks.',
-    imageSrc: messBucketImage,
-    imageAlt: 'MessBucket application',
+    imageSrc: messageBucketImage,
+    imageAlt: 'MessageBucket application',
     tech: 'Node.js, PostgreSQL',
   },
   {
