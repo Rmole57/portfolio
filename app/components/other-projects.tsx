@@ -88,8 +88,6 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
 
   const open = Boolean(anchorEl);
 
-  console.log(anchorEl);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
