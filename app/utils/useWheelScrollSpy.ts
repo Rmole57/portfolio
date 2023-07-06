@@ -45,7 +45,7 @@ const useWheelScrollSpy = ({ items = [] } = {}) => {
     }
   }, [activeState]);
 
-  useThrottledOnWheelScroll(items.length > 0 ? findActiveIndex : null, 166);
+  useThrottledOnWheelScroll(items.length > 0 ? findActiveIndex : null, 100);
 
   return activeState;
 };
