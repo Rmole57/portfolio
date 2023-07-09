@@ -116,6 +116,7 @@ function SmallProject({
         anchorEl={anchorEl}
         sx={{
           pointerEvents: 'none',
+          zIndex: 1,
         }}
         anchorOrigin={{
           vertical: 'center',
