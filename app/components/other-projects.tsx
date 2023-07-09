@@ -7,6 +7,7 @@ import messageBucketImage from '../../public/messagebucket.png';
 import dijkstraImage from '../../public/dijkstra.png';
 import todoListImage from '../../public/todo-list.png';
 import { motion } from 'framer-motion';
+import { elementIsVisibleInViewport } from '../utils/elementIsVisibleInViewport';
 
 type SmallProjectProps = Omit<LargeProjectProps, 'ctaText' | 'ctaLink'> & {
   tech: string;
@@ -92,7 +93,7 @@ function SmallProject({
     document.addEventListener('scroll', handlePopoverClose);
   }, []);
 
-  const open = Boolean(anchorEl);
+  const open = Boolean(anchorEl) && elementIsVisibleInViewport(anchorEl);
 
   return (
     <motion.div
