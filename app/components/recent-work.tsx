@@ -5,16 +5,16 @@ import tapestryImage from '../../public/tapestry-ui.png';
 import hightouchSiteImage from '../../public/hightouch-ui.png';
 import { motion } from 'framer-motion';
 
-export type LargeProject = {
+export interface LargeProjectProps {
   title: string;
   description: string;
   imageSrc: StaticImageData;
   imageAlt: string;
   ctaText: string;
   ctaLink: string;
-};
+}
 
-const PROJECTS: LargeProject[] = [
+const PROJECTS: LargeProjectProps[] = [
   {
     title: 'Hightouch',
     description:
@@ -51,50 +51,53 @@ export default function RecentWork() {
         margin="56px 100px"
       >
         <Typography variant="h2">Recent work</Typography>
-        {PROJECTS.map((project, idx) => {
-          const { title, description, imageSrc, imageAlt, ctaText, ctaLink } =
-            project;
-
-          return (
-            <Box
-              display="flex"
-              key={`project-${idx}-${title}`}
-              gap={10}
-              mt={-6}
-            >
-              <Box
-                display="flex"
-                flexDirection="column"
-                gap={2}
-                justifyContent="center"
-              >
-                <Typography variant="h3">{title}</Typography>
-                <Typography variant="body2" whiteSpace="pre-wrap">
-                  {description}
-                </Typography>
-                <motion.div
-                  whileHover={{
-                    scale: 1.1,
-                    transition: { duration: 0.2 },
-                    originX: 0,
-                  }}
-                  style={{ width: 'fit-content' }}
-                >
-                  <Button
-                    variant="outlined"
-                    href={ctaLink}
-                    target="_blank"
-                    sx={{ borderRadius: '4px', width: 'fit-content' }}
-                  >
-                    <Typography variant="ctaButton">{ctaText}</Typography>
-                  </Button>
-                </motion.div>
-              </Box>
-              <Image src={imageSrc} alt={imageAlt} width={700} height={360} />
-            </Box>
-          );
-        })}
+        {PROJECTS.map((project, idx) => (
+          <LargeProject key={`project-${idx}-${project.title}`} {...project} />
+        ))}
       </Box>
     </motion.div>
+  );
+}
+
+function LargeProject({
+  title,
+  description,
+  imageSrc,
+  imageAlt,
+  ctaText,
+  ctaLink,
+}: LargeProjectProps) {
+  return (
+    <Box display="flex" gap={10} mt={-6}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap={2}
+        justifyContent="center"
+      >
+        <Typography variant="h3">{title}</Typography>
+        <Typography variant="body2" whiteSpace="pre-wrap">
+          {description}
+        </Typography>
+        <motion.div
+          whileHover={{
+            scale: 1.1,
+            transition: { duration: 0.2 },
+            originX: 0,
+          }}
+          style={{ width: 'fit-content' }}
+        >
+          <Button
+            variant="outlined"
+            href={ctaLink}
+            target="_blank"
+            sx={{ borderRadius: '4px', width: 'fit-content' }}
+          >
+            <Typography variant="ctaButton">{ctaText}</Typography>
+          </Button>
+        </motion.div>
+      </Box>
+      <Image src={imageSrc} alt={imageAlt} width={700} height={360} />
+    </Box>
   );
 }

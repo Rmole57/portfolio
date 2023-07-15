@@ -1,18 +1,19 @@
 import React from 'react';
 import { Box, Grid, Popover, Typography } from '@mui/material';
 import Image from 'next/image';
-import { LargeProject } from './recent-work';
+import { LargeProjectProps } from './recent-work';
 import reactionImage from '../../public/reaction.png';
 import messageBucketImage from '../../public/messagebucket.png';
 import dijkstraImage from '../../public/dijkstra.png';
 import todoListImage from '../../public/todo-list.png';
 import { motion } from 'framer-motion';
+import { elementIsVisibleInViewport } from '../utils/elementIsVisibleInViewport';
 
-type SmallProject = Omit<LargeProject, 'ctaText' | 'ctaLink'> & {
+type SmallProjectProps = Omit<LargeProjectProps, 'ctaText' | 'ctaLink'> & {
   tech: string;
 };
 
-const PROJECTS: SmallProject[] = [
+const PROJECTS: SmallProjectProps[] = [
   {
     title: 'Reaction',
     description: 'Kanban-style, list-making application inspired by Trello.',
@@ -62,7 +63,7 @@ export default function OtherProjects() {
 
           return (
             <Grid item key={`project-${idx}-${title}`}>
-              <Project {...project} />
+              <SmallProject {...project} />
             </Grid>
           );
         })}
@@ -71,7 +72,13 @@ export default function OtherProjects() {
   );
 }
 
-function Project({ title, description, imageSrc, imageAlt, tech }) {
+function SmallProject({
+  title,
+  description,
+  imageSrc,
+  imageAlt,
+  tech,
+}: SmallProjectProps) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -86,9 +93,7 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
     document.addEventListener('scroll', handlePopoverClose);
   }, []);
 
-  const open = Boolean(anchorEl);
-
-  console.log(anchorEl);
+  const open = Boolean(anchorEl) && elementIsVisibleInViewport(anchorEl);
 
   return (
     <motion.div
@@ -112,6 +117,7 @@ function Project({ title, description, imageSrc, imageAlt, tech }) {
         anchorEl={anchorEl}
         sx={{
           pointerEvents: 'none',
+          zIndex: 1,
         }}
         anchorOrigin={{
           vertical: 'center',

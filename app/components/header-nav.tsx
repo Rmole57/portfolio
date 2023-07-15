@@ -1,19 +1,22 @@
 'use client';
 
 import { Box, Tab, Tabs, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import useWheelScrollSpy from '../utils/useWheelScrollSpy';
+import _findIndex from 'lodash/findIndex';
 
-type NavItem = {
+export type NavItem = {
+  hash?: string;
   label: string;
   href: string;
   download?: string;
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'About', href: '#about' },
-  { label: 'Work', href: '#work' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { hash: 'about', label: 'About', href: '#about' },
+  { hash: 'work', label: 'Work', href: '#work' },
+  { hash: 'projects', label: 'Projects', href: '#projects' },
+  { hash: 'contact', label: 'Contact', href: '#contact' },
   {
     label: 'Resume',
     href: 'rick-mole-resume.pdf',
@@ -22,11 +25,18 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export default function HeaderNav() {
-  const [value, setValue] = React.useState(0);
+  const [activeIndex, setActiveIndex] = React.useState<number>(0);
+  const active = useWheelScrollSpy({
+    items: NAV_ITEMS.filter((item) => item.hash),
+  });
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setActiveIndex(newValue);
   };
+
+  useEffect(() => {
+    setActiveIndex(active ? _findIndex(NAV_ITEMS, ['hash', active]) : 0);
+  }, [active]);
 
   return (
     <Box
@@ -39,7 +49,7 @@ export default function HeaderNav() {
       height="48px"
       position="sticky"
       top={0}
-      zIndex={1}
+      zIndex={10}
     >
       <Box
         sx={{ display: 'flex', justifyContent: 'space-between', px: '100px' }}
@@ -55,7 +65,7 @@ export default function HeaderNav() {
         >
           Rick Molé
         </Typography>
-        <Tabs value={value} onChange={handleChange}>
+        <Tabs value={activeIndex} onChange={handleChange}>
           {NAV_ITEMS.map((navItem, idx) => (
             <Tab component="a" key={`${navItem.label}-${idx}`} {...navItem} />
           ))}
