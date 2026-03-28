@@ -1,14 +1,12 @@
 'use client';
 
-import {
-  HeaderNav,
-  Hero,
-  About,
-  RecentWork,
-  OtherProjects,
-  Contact,
-  CustomDivider,
-} from './components';
+import HeaderNav from './components/HeaderNav';
+import Hero from './components/Hero';
+import About from './components/About';
+import RecentWork from './components/RecentWork';
+import OtherProjects from './components/OtherProjects';
+import Contact from './components/Contact';
+import CustomDivider from './components/CustomDivider';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { siteTheme } from './site-theme';
 

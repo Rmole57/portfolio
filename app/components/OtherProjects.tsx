@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid, Popover, Typography } from '@mui/material';
 import Image from 'next/image';
-import { LargeProjectProps } from './recent-work';
+import { LargeProjectProps } from './RecentWork';
 import reactionImage from '../../public/reaction.png';
 import messageBucketImage from '../../public/messagebucket.png';
 import dijkstraImage from '../../public/dijkstra.png';

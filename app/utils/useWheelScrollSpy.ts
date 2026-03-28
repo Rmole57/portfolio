@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import useThrottledOnWheelScroll from './useThrottledOnWheelScroll';
-import { NavItem } from '../components/header-nav';
+import { NavItem } from '../components/HeaderNav';
 
 const useWheelScrollSpy = ({ items = [] } = {}) => {
   const itemsWithNodeRef = useRef([]);
