@@ -128,9 +128,15 @@ body {
   color: var(--text-on-dark);
 }
 
-.nav__link--active {
-  border-bottom: 1px solid var(--text-on-dark);
-  padding-bottom: 3px;
+.nav__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--text-on-dark);
+  pointer-events: none;
 }
 
 /* ---- Per-character rolling text ---- */
