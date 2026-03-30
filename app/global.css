@@ -139,32 +139,38 @@ body {
   pointer-events: none;
 }
 
-/* ---- Per-character rolling text ---- */
+/* ---- Per-character cylinder roll ---- */
 .roll {
   display: inline-block;
-  overflow: hidden;
+  perspective: 300px;
   line-height: 1.4;
 }
 
 .roll__char {
   display: inline-block;
   position: relative;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
   /* Leave state: stagger right-to-left (reverse) */
-  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
   transition-delay: calc((var(--total) - var(--i)) * 25ms);
 }
 
 .roll__char::before {
   content: attr(data-char);
   position: absolute;
-  bottom: 100%;
+  top: 0;
   left: 0;
+  transform: translateY(-100%) rotateX(90deg);
+  transform-origin: bottom center;
+  backface-visibility: hidden;
 }
 
 /* Hover: stagger left-to-right */
 .nav__logo:hover .roll__char,
 .nav__link:not(.nav__link--resume):hover .roll__char {
-  transform: translateY(100%);
+  transform: rotateX(-90deg);
   transition-delay: calc(var(--i) * 25ms);
 }
 
