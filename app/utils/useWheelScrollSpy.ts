@@ -1,19 +1,20 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import useThrottledOnWheelScroll from './useThrottledOnWheelScroll';
+import { useThrottledOnWheelScroll } from './useThrottledOnWheelScroll';
 import { NavItem } from '../components/HeaderNav';
 
 const useWheelScrollSpy = ({ items = [] } = {}) => {
-  const itemsWithNodeRef = useRef([]);
+  const itemsWithNodeRef = useRef<
+    { hash?: string; node: HTMLElement | null }[]
+  >([]);
   useEffect(() => {
     itemsWithNodeRef.current = getItemsClient(items);
   }, [items]);
 
-  const [activeState, setActiveState] = useState(null);
+  const [activeState, setActiveState] = useState<string | null>(null);
 
   const findActiveIndex = useCallback(() => {
-    let active: any;
+    let active: { hash?: string | null } | undefined;
     for (let i = itemsWithNodeRef.current.length - 1; i >= 0; i -= 1) {
-      // No hash if we're near the top of the page
       if (document.documentElement.scrollTop < 200) {
         active = { hash: null };
         break;
@@ -40,10 +41,11 @@ const useWheelScrollSpy = ({ items = [] } = {}) => {
       }
     }
 
-    if (active && activeState !== active.hash) {
-      setActiveState(active.hash);
+    if (active) {
+      const next = active.hash ?? null;
+      setActiveState((prev) => (prev !== next ? next : prev));
     }
-  }, [activeState]);
+  }, []);
 
   useThrottledOnWheelScroll(items.length > 0 ? findActiveIndex : null, 100);
 
@@ -51,6 +53,9 @@ const useWheelScrollSpy = ({ items = [] } = {}) => {
 };
 
 const getItemsClient = (items: NavItem[]) =>
-  items.map(({ hash }) => ({ hash, node: document.getElementById(hash) }));
+  items.map(({ hash }) => ({
+    hash,
+    node: document.getElementById(hash ?? ''),
+  }));
 
-export default useWheelScrollSpy;
+export { useWheelScrollSpy };

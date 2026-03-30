@@ -1,9 +1,7 @@
 'use client';
 
-import { Box, Tab, Tabs, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
-import useWheelScrollSpy from '../utils/useWheelScrollSpy';
-import _findIndex from 'lodash/findIndex';
+import React, { useEffect, useState } from 'react';
+import { useWheelScrollSpy } from '../utils/useWheelScrollSpy';
 
 export type NavItem = {
   hash?: string;
@@ -14,8 +12,7 @@ export type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { hash: 'about', label: 'About', href: '#about' },
-  { hash: 'work', label: 'Work', href: '#work' },
-  { hash: 'projects', label: 'Projects', href: '#projects' },
+  { hash: 'work', label: 'Work', href: '#watchtower' },
   { hash: 'contact', label: 'Contact', href: '#contact' },
   {
     label: 'Resume',
@@ -24,53 +21,83 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-export default function HeaderNav() {
-  const [activeIndex, setActiveIndex] = React.useState<number>(0);
-  const active = useWheelScrollSpy({
-    items: NAV_ITEMS.filter((item) => item.hash),
-  });
+// All section IDs that the scroll spy should track
+const SCROLL_SPY_ITEMS = [
+  { hash: 'about' },
+  { hash: 'watchtower' },
+  { hash: 'default' },
+  { hash: 'hightouch' },
+  { hash: 'tapestry' },
+  { hash: 'contact' },
+];
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setActiveIndex(newValue);
-  };
+// Map work section hashes to the "work" nav item
+const WORK_SECTIONS = new Set(['watchtower', 'default', 'hightouch', 'tapestry']);
 
-  useEffect(() => {
-    setActiveIndex(active ? _findIndex(NAV_ITEMS, ['hash', active]) : 0);
-  }, [active]);
+/** Splits text into per-character rolling spans with stagger CSS vars */
+function RollingText({ text }: { text: string }) {
+  const chars = text.split('');
+  const total = chars.length - 1;
 
   return (
-    <Box
-      component="nav"
-      sx={{
-        borderBottom: 1,
-        borderColor: 'divider',
-        backgroundColor: '#fff',
-      }}
-      height="48px"
-      position="sticky"
-      top={0}
-      zIndex={10}
-    >
-      <Box
-        sx={{ display: 'flex', justifyContent: 'space-between', px: '100px' }}
-      >
-        <Typography
-          href="#"
-          component="a"
-          variant="button"
-          display="flex"
-          alignItems="center"
-          color="#666666"
-          style={{ textDecoration: 'none' }}
+    <>
+      {chars.map((char, i) => (
+        <span
+          key={i}
+          className="roll"
+          style={{ '--i': i, '--total': total } as React.CSSProperties}
         >
-          Rick Molé
-        </Typography>
-        <Tabs value={activeIndex} onChange={handleChange}>
-          {NAV_ITEMS.map((navItem, idx) => (
-            <Tab component="a" key={`${navItem.label}-${idx}`} {...navItem} />
-          ))}
-        </Tabs>
-      </Box>
-    </Box>
+          <span className="roll__char" data-char={char === ' ' ? '\u00A0' : char}>
+            {char === ' ' ? '\u00A0' : char}
+          </span>
+        </span>
+      ))}
+    </>
+  );
+}
+
+export function HeaderNav() {
+  const [mounted, setMounted] = useState(false);
+  const active = useWheelScrollSpy({ items: SCROLL_SPY_ITEMS });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  // Map the active section to the corresponding nav item
+  const activeNavHash = active && WORK_SECTIONS.has(active) ? 'work' : active;
+
+  return (
+    <nav className="nav">
+      <a href="#" className="nav__logo">
+        <RollingText text="Rick Molé" />
+      </a>
+      <ul className="nav__links">
+        {NAV_ITEMS.map((item) => {
+          const isActive = item.hash && activeNavHash === item.hash;
+          const isResume = item.download;
+
+          return (
+            <li key={item.label}>
+              <a
+                href={item.href}
+                download={item.download}
+                className={`nav__link ${isActive ? 'nav__link--active' : ''} ${
+                  isResume ? 'nav__link--resume' : ''
+                }`}
+              >
+                {isResume ? (
+                  <span>{item.label}</span>
+                ) : (
+                  <RollingText text={item.label} />
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
