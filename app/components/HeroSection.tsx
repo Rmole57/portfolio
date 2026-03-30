@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 /* ── Light-leak configuration ── */
 const LEAKS = [

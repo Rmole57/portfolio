@@ -1,7 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useSyncExternalStore } from 'react';
 import { useWheelScrollSpy } from '../utils/useWheelScrollSpy';
+
+const noop = () => () => {};
+const getTrue = () => true;
+const getFalse = () => false;
 
 export type NavItem = {
   hash?: string;
@@ -57,12 +61,8 @@ function RollingText({ text }: { text: string }) {
 }
 
 export function HeaderNav() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(noop, getTrue, getFalse);
   const active = useWheelScrollSpy({ items: SCROLL_SPY_ITEMS });
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (!mounted) return null;
 

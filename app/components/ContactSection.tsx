@@ -1,12 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
+
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] },
+  transition: { duration: 0.7, delay, ease: EASE },
 });
 
 function EmailIcon() {
