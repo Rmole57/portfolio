@@ -86,10 +86,10 @@ export function AboutSection() {
               sequences, and obsessing over how stories feel when they land.
               Somewhere along the way I realized the same instincts that made a
               scene work also made an interface work: pacing, clarity, knowing
-              what to leave out. So I made the jump. Today I&apos;m a senior
-              frontend engineer in New York building complex product interfaces,
-              from 0&#8209;to&#8209;1 architecture at production scale. The
-              medium changed, but the craft didn&apos;t.
+              what to leave out. So I made the jump. Today, I&apos;m a frontend
+              engineer in New York building complex product interfaces, from
+              0&#8209;to&#8209;1 architecture at production scale. The medium
+              changed, but the craft didn&apos;t.
             </motion.p>
 
             <motion.div
