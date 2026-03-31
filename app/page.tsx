@@ -57,7 +57,7 @@ const WORK_EXPERIENCE: WorkSectionProps[] = [
     role: 'Co-Creator & Software Engineer',
     period: 'May 2021 — Oct 2021',
     description:
-      'Tapestry is an open-source framework for deploying end-to-end data pipelines on AWS. It automates the entire provisioning process — from data ingestion through activation — so developers can go from zero to a fully operational pipeline with minimal manual configuration. I co-created Tapestry alongside a small team, designing the configuration-driven orchestration system and co-authoring the technical case study on its architecture and design decisions.',
+      'Tapestry is an open-source framework for deploying end-to-end data pipelines on AWS infrastructure. It automates the entire provisioning process — from data ingestion through activation — so developers can go from zero to a fully operational pipeline with minimal manual configuration. I co-created Tapestry alongside a small team, designing the configuration-driven orchestration system and co-authoring the technical case study on its architecture and design decisions.',
     accentColor: '#9579FD',
     url: 'https://tapestry-pipeline.github.io/',
     urlLabel: 'Read the case study',
