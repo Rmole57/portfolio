@@ -118,6 +118,10 @@ const LEAKS: Leak[] = [
 	},
 ];
 
+const LEAK_KEYS: string[] = LEAKS.map(
+	(l) => `${l.color}@${l.startX}x${l.startY}-${l.width}x${l.height}`,
+);
+
 /** Generates a random drift target relative to an origin point */
 function randomTarget(originX: number, originY: number, range: number) {
 	return {
@@ -148,8 +152,8 @@ function scrollCueClearOfNav(heroRect: DOMRect) {
 
 export function HeroSection() {
 	const sectionRef = useRef<HTMLElement>(null);
-	const scrollCueIntroDone = useRef(false);
 	const [showScrollCue, setShowScrollCue] = useState(true);
+	const [scrollCueIntroDone, setScrollCueIntroDone] = useState(false);
 	const leakRefs = useRef<(HTMLDivElement | null)[]>([]);
 	const mouseRef = useRef({ x: 0.5, y: 0.5, active: false });
 	const pointerInHeroRef = useRef(false);
@@ -199,7 +203,7 @@ export function HeroSection() {
 
 	useEffect(() => {
 		const t = window.setTimeout(() => {
-			scrollCueIntroDone.current = true;
+			setScrollCueIntroDone(true);
 		}, 2600);
 		return () => window.clearTimeout(t);
 	}, []);
@@ -301,7 +305,7 @@ export function HeroSection() {
 						: `radial-gradient(ellipse at center, ${leak.color}, transparent 70%)`;
 				return (
 					<div
-						key={i}
+						key={LEAK_KEYS[i]}
 						ref={(el) => {
 							leakRefs.current[i] = el;
 						}}
@@ -363,7 +367,7 @@ export function HeroSection() {
 				animate={{ opacity: showScrollCue ? 1 : 0 }}
 				transition={{
 					duration: showScrollCue ? 0.5 : 0.2,
-					delay: showScrollCue && !scrollCueIntroDone.current ? 1.5 : 0,
+					delay: showScrollCue && !scrollCueIntroDone ? 1.5 : 0,
 				}}
 				aria-hidden={!showScrollCue}
 			>
@@ -375,7 +379,9 @@ export function HeroSection() {
 					fill="none"
 					stroke="currentColor"
 					strokeWidth="1.5"
+					aria-hidden
 				>
+					<title>Downward arrow</title>
 					<path d="M8 3v10M3 9l5 5 5-5" />
 				</svg>
 			</motion.div>
